@@ -1,0 +1,98 @@
+SHPP,OFF
+/CWD,'E:\work\topo_secondraydevelop\1001\ANSYS_APDL\temp' 
+/INPUT,'test01','cdb','E:\work\topo_secondraydevelop\1001\ANSYS_APDL\temp\',, 0   
+/FILENAME,get_result_data,1
+/TITLE,get_result_data 
+
+*GET,ELEMSUM,ELEMENT,0,COUNT
+
+
+!STEP 1
+/PREP7
+*VGET, elemlist, ELEM, , elist
+
+ET,10000,SOLID185
+
+
+ESEL,S,TYPE,,1  
+/REPLOT
+
+
+
+
+*GET,ET1SUM,ELEMENT,0,COUNT
+*dim, E, array,ET1SUM,1   
+k = 1  
+*do, i, 1, ELEMSUM
+*if, esel(i), eq, 1, then
+E(k)=i
+k = k+1
+*endif
+*enddo
+
+
+!STEP2
+
+*DIM,X,ARRAY,ET1SUM,1
+*VREAD,X(1,1),E:\work\topo_secondraydevelop\1001\ANSYS_APDL\temp\x,txt,,JIK,1,ET1SUM
+(F11.5)
+*DO,E_count,1,ET1SUM
+h = E(E_count)
+*IF,X(E_count),LT,0.4,THEN
+EMODIF,elemlist(h), TYPE, 10000
+*ENDIF
+*ENDDO
+
+
+ESEL,S,TYPE,,1,2 
+/REPLOT
+EPLOT
+
+/RGB,INDEX,100,100,100, 0   
+/RGB,INDEX, 80, 80, 80,13   
+/RGB,INDEX, 60, 60, 60,14   
+/RGB,INDEX, 0, 0, 0,15  
+/REPLOT 
+/UDOC,1,TYPE,OFF
+/UDOC,1,DATE,OFF
+/UDOC,1,TYP2,LEFT   
+/UDOC,1,INUM,LEFT   
+/UDOC,1,BCDC,LEFT   
+/UDOC,1,SURF,LEFT   
+/UDOC,1,BODY,LEFT   
+/UDOC,1,VECT,LEFT   
+/UDOC,1,GWIN,LEFT   
+/UDOC,1,VIEW,OFF
+/UDOC,1,PSTA,OFF
+/UDOC,1,MISC,OFF
+
+/PLOPTS,INFO,2  
+/PLOPTS,LEG1,0  
+/PLOPTS,LEG2,0  
+/PLOPTS,LEG3,1  
+/PLOPTS,FRAME,0 
+/PLOPTS,TITLE,0 
+/PLOPTS,MINM,0  
+/PLOPTS,FILE,0  
+/PLOPTS,SPNO,0  
+/PLOPTS,LOGO,1  
+/PLOPTS,WINS,0  
+/PLOPTS,WP,0
+/PLOPTS,DATE,0  
+/TRIAD,OFF  
+/REPLOT 
+
+/PNUM,KP,0  
+/PNUM,LINE,0
+/PNUM,AREA,0
+/PNUM,VOLU,0
+/PNUM,NODE,0
+/PNUM,TABN,0
+/PNUM,SVAL,0
+/NUMBER,1   
+/PNUM,TYPE,1
+/REPLOT 
+
+SAVE,'result','db','E:\work\topo_secondraydevelop\1001\ANSYS_APDL\temp\'
+
+/CLEAR,START

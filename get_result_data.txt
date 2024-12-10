@@ -1,0 +1,73 @@
+SHPP,OFF
+/CWD,'E:\work\topo_secondraydevelop\1001\ANSYS_APDL\temp'  
+/INPUT,'test01','cdb','E:\work\topo_secondraydevelop\1001\ANSYS_APDL\temp\',, 0   
+/FILENAME,get_result_data,1
+/TITLE,get_result_data 
+
+*GET,ELEMSUM,ELEMENT,0,COUNT
+
+
+ESEL,S,TYPE,,1  
+/REPLOT
+
+
+*GET,ET1SUM,ELEMENT,0,COUNT
+*GET,NT1SUM,NODE,0,COUNT
+
+*DIM,MATERIAL,ARRAY,ET1SUM,2                                                      
+*VREAD,MATERIAL(1,1),material,txt,,JIK,2,ET1SUM                                  
+(F13.10,F14.10)   
+
+
+*dim, E,  array,ET1SUM,1   
+k = 1  
+*do, i, 1, ELEMSUM
+*if, esel(i), eq, 1, then   
+E(k)=i
+k = k+1
+*endif
+*enddo
+
+
+
+/PREP7
+                                                
+
+*DO,i,10001,ET1SUM+10000
+MP,EX,i,MATERIAL(i-10000,2)  
+MP,PRXY,i,MATERIAL(i-10000,1)  
+*ENDDO
+
+
+*DO,i,10001,ET1SUM+10000 
+EMODIF, E(i-10000), MAT, i
+*ENDDO
+
+ALLSEL,ALL  
+/REPLOT
+
+
+/SOL
+/STATUS,SOLU
+SOLVE   
+FINISH
+
+
+
+/POST1
+set,last
+*dim,ENERGY,array,ET1SUM,1
+*do,i,1,ET1SUM
+ *get,ENERGY(i),elem,E(i),sene
+*enddo
+
+
+*CFOPEN, SENE, TXT 
+*DO, t, 1, 1
+    *VWRITE, ENERGY(t) 
+(E20.12)
+*ENDDO
+*CFCLOS
+
+/CLEAR,START
+
