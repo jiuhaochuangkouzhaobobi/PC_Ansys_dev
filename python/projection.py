@@ -17,7 +17,7 @@ import pandas as pd
 
 
 class SIMP(object):
-    """
+    """1
     本文件是主程序，调用finite_element_analysis.py有限元计算模块，获取模型数据、应变能等数据
 
     参数说明：

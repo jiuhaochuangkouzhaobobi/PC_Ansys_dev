@@ -32,7 +32,7 @@ class FEA(object):
     def __init__(self):
         # 输入文件(APDL)和输出文件都将在cwd目录中，而ANSYS需要的其他输入数据或输出数据的路径，将由ANSYS的APDL指定
         #---------------PC路径--------------------
-        self.awd = r'E:\work\topo_secondraydevelop\PythonC_Ansys_dev-1/'
+        self.awd = r'E:\work\topo_secondraydevelop\Python_CPP_Ansys_dev/'
         self.elemnt_type = "SOLID185"#平面PLANE182 实体SOLID185 壳单元SHELL181
         self.E = 1
         self.ansys_path = r"D:\Program Files\ANSYS Inc\v241\ansys\bin\winx64\MAPDL.exe"
