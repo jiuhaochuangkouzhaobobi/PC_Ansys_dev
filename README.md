@@ -1,0 +1,3 @@
+此版本是移植mma/get_distance_table/过滤投影/PyMAPDL的代码库
+移植代码在projection库里
+运行代码前请修改并运行callgrpc01.bat启动ansys
